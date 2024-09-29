@@ -1,0 +1,27 @@
+<div class="contact-form">
+  <h2>Formular de contact</h2>
+  <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+    <label for="name">Nume:</label>
+    <input type="text" id="name" formControlName="name" />
+    <div *ngIf="contactForm.get('name')?.invalid && contactForm.get('name')?.touched" class="error">
+      Numele este obligatoriu.
+    </div>
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" formControlName="email" />
+    <div *ngIf="contactForm.get('email')?.touched" class="error">
+      <small *ngIf="contactForm.get('email')?.errors?.['required']">Email-ul este obligatoriu.</small>
+      <small *ngIf="contactForm.get('email')?.errors?.['email'] && !contactForm.get('email')?.errors?.['required']">
+        Email-ul nu este valid.
+      </small>
+    </div>
+
+    <label for="message">Mesaj:</label>
+    <textarea id="message" formControlName="message"></textarea>
+    <div *ngIf="contactForm.get('message')?.invalid && contactForm.get('message')?.touched" class="error">
+      Mesajul este obligatoriu.
+    </div>
+
+    <button type="submit">Trimite</button>
+  </form>
+</div>
